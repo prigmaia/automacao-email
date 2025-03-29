@@ -1,3 +1,6 @@
+Priscila G. Maia
+Março 2025
+
 # -*- coding: utf-8 -*-
 """automação e-mail.ipynb
 
@@ -39,14 +42,14 @@ server = smtplib.SMTP("smtp.gmail.com", 587)
 server.starttls()
 server.login(email_sender, email_password)
 
-# Iterar sobre os municípios e enviar os e-mails
+# Iterar sobre os municípios e enviar os e-mails Use para codificar com o que desejar! 
 for index, row in email_df.iterrows():
     municipio_id = row["Identificador"]
     municipio_nome = row["Município"]
     destinatario = row["E-mail"]
 
     # Nome do arquivo esperado
-    file_name = f"{municipio_id}_{municipio_nome}.xlsx"
+    file_name = f"{municipio_id}_{especifico_nome}.xlsx"
     file_location = os.path.join(file_path, file_name)
 
     # Verifica se o arquivo existe antes de enviar
@@ -55,10 +58,10 @@ for index, row in email_df.iterrows():
         msg = MIMEMultipart()
         msg["From"] = email_sender
         msg["To"] = destinatario
-        msg["Subject"] = f" (TESTE) Relatório de Projeção Populacional (2010-2040) - {municipio_nome}"
+        msg["Subject"] = f" ASSUNTO DO SEU E-mail - {especifico_nome}"
 
         # Corpo do e-mail
-        body = f"Prezados,\n\nEste é um e-mail da Coordenação de Indicadores Sociais (CIS) - Fundação João Pinheiro (FJP). \n\nSegue anexo o Relatório de Projeção Populacional do município de {municipio_nome} para o período de 2010 a 2040. \n\nCaso haja dúvidas ou necessidade de informações adicionais, estamos à disposição. \n\nAtenciosamente,\n[Seu Nome]"
+        body = f"Prezados,\n\nEspero que este e-mail os encontre bem. \n\nSegue anexo o {especifico_nome}. \n\nCaso haja dúvidas ou necessidade de informações adicionais, estou à disposição. \n\nAtenciosamente,\n[Seu Nome]"
         msg.attach(MIMEText(body, "plain"))
 
         # Anexando o arquivo
@@ -71,9 +74,9 @@ for index, row in email_df.iterrows():
 
         # Enviar o e-mail
         server.sendmail(email_sender, destinatario, msg.as_string())
-        print(f"E-mail enviado para {municipio_nome} ({destinatario}) com sucesso!")
+        print(f"E-mail enviado para {especifico_nome} ({destinatario}) com sucesso!")
     else:
-        print(f"Arquivo não encontrado para {municipio_nome}. E-mail não enviado.")
+        print(f"Arquivo não encontrado para {especifico_nome}. E-mail não enviado.")
 
 # Fechar conexão com o servidor
 server.quit()
